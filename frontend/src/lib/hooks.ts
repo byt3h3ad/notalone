@@ -10,6 +10,14 @@ export const useGetThoughts = () => {
   return query;
 };
 
+export const useCreateThought = () => {
+  const mutation = useMutation({
+    mutationFn: (data: { content: string; emotions: string[] }) =>
+      axios.post(ENDPOINTS.CREATE_POST, data),
+  });
+  return mutation;
+};
+
 export const useLikeThought = () => {
   const mutation = useMutation({
     mutationFn: (id: string) => axios.put(`${ENDPOINTS.LIKE_POST}/${id}/like`),

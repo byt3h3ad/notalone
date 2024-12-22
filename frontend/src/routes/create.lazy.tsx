@@ -15,6 +15,7 @@ import {
 } from "../components/ui/form";
 import { Textarea } from "../components/ui/textarea";
 import { EMOTIONS } from "../lib/constants";
+import { useCreateThought } from "../lib/hooks";
 
 const formSchema = z.object({
   content: z.string().min(1).max(1000).trim(),
@@ -35,14 +36,16 @@ function RouteComponent() {
       emotions: [],
     },
   });
-  console.log(form);
+  const { mutate, isPending } = useCreateThought();
   function onSubmit(data: z.infer<typeof formSchema>) {
-    toast("You submitted the following values:", {
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
+    mutate(data, {
+      onError: () => {
+        toast("an error occurred while submitting your thought");
+      },
+      onSuccess: () => {
+        toast("your thought has been posted");
+        form.reset();
+      },
     });
   }
   return (
@@ -115,7 +118,7 @@ function RouteComponent() {
               </FormItem>
             )}
           />
-          <Button type="submit">Submit</Button>
+          <Button type="submit">{isPending ? "submitting" : "submit"}</Button>
         </form>
       </Form>
     </main>

@@ -55,7 +55,7 @@ async def create_post(post: create_thought):
     return thought(**created_post)
 
 @app.get("/thoughts", response_model=List[thought])
-async def get_thoughts(skip : int = 0, limit: int = 10):
+async def get_thoughts(skip : int = 0, limit: int = 40):
     thoughts = await app.list.find().skip(skip).limit(limit).to_list(limit)
     return thoughts
 
