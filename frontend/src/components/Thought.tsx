@@ -27,7 +27,7 @@ export const Thought: React.FC<Props> = ({
 }) => {
   const { mutate: like } = useLikeThought();
   return (
-    <Card key={_id} className="w-fit max-h-fit">
+    <Card key={_id} className="w-fit h-fit">
       <CardHeader>
         <CardDescription className="opacity-60">
           {formatDate(created_at)}

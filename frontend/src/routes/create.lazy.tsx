@@ -1,21 +1,24 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
+import { z } from "zod";
+import { Button } from "../components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "../components/ui/form";
+import { Textarea } from "../components/ui/textarea";
 
 const formSchema = z.object({
   content: z.string().min(1).max(1000),
-  emotions: z.array(z.string()).min(1),
+  emotions: z
+    .array(z.string())
+    .nonempty({ message: "Please select at least one emotion" }),
 });
 
 export const Route = createLazyFileRoute("/create")({
@@ -36,8 +39,45 @@ function RouteComponent() {
     });
   }
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}></form>
-    </Form>
+    <main className="grid place-content-center min-h-screen">
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <FormField
+            control={form.control}
+            name="content"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>open up</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="how are you feeling today?"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="emotions"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>emotions</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="How are you feeling?"
+                    className="resize-none"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button type="submit">Submit</Button>
+        </form>
+      </Form>
+    </main>
   );
 }
