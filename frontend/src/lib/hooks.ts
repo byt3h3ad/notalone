@@ -10,6 +10,14 @@ export const useGetThoughts = () => {
   return query;
 };
 
+export const useGetThought = (id: string) => {
+  const query = useQuery({
+    queryKey: ["thought", { id }],
+    queryFn: () => axios.get(`${ENDPOINTS.GET_POST}/${id}`),
+  });
+  return query;
+};
+
 export const useCreateThought = () => {
   const mutation = useMutation({
     mutationFn: (data: { content: string; emotions: string[] }) =>
@@ -18,9 +26,32 @@ export const useCreateThought = () => {
   return mutation;
 };
 
+export const useGetLikeCount = (id: string) => {
+  const query = useQuery({
+    queryKey: ["likes", { id }],
+    queryFn: () => axios.get(`${ENDPOINTS.LIKE_POST}/${id}/like`),
+  });
+  return query;
+};
+
 export const useLikeThought = () => {
   const mutation = useMutation({
     mutationFn: (id: string) => axios.put(`${ENDPOINTS.LIKE_POST}/${id}/like`),
   });
   return mutation;
+};
+
+export const useDeleteThought = () => {
+  const mutation = useMutation({
+    mutationFn: (id: string) => axios.delete(`${ENDPOINTS.DELETE_POST}/${id}`),
+  });
+  return mutation;
+};
+
+export const useGetThoughtCount = () => {
+  const query = useQuery({
+    queryKey: ["thoughts_count"],
+    queryFn: () => axios.get(ENDPOINTS.POSTS_COUNT),
+  });
+  return query;
 };

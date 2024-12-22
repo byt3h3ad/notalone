@@ -5,5 +5,15 @@ export const Route = createLazyFileRoute("/about")({
 });
 
 function RouteComponent() {
-  return <div>Hello "/about"!</div>;
+  return (
+    <main className="max-w-3xl mx-auto my-6">
+      <p>all our mental health is fucked.</p>
+      <p>we all sometimes need a place to vent, without judgement.</p>
+      <p>this is meant to be one.</p>
+      <p>completely anonymous.</p>
+      <p>be kind,</p>
+      <p>to others, to yourself.</p>
+      <p>you are not alone.</p>
+    </main>
+  );
 }

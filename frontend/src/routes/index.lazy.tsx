@@ -10,20 +10,22 @@ export const Route = createLazyFileRoute("/")({
 function RouteComponent() {
   const { data, isPending, isError } = useGetThoughts();
   return (
-    <section className="my-4 grid md:auto-rows-[18rem] grid-cols-1 md:grid-cols-3 gap-4 max-w-7xl mx-auto">
-      {isPending && <div>Loading...</div>}
-      {isError && <div>Error...</div>}
-      {data?.data.map(
-        (
-          thought: JSX.IntrinsicAttributes & {
-            content: string;
-            emotions: string[];
-            _id: string;
-            created_at: string;
-            likes: number;
-          }
-        ) => <Thought {...thought} />
-      )}
-    </section>
+    <>
+      <section className="my-4 grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-4">
+        {isPending && <div>Loading...</div>}
+        {isError && <div>Error...</div>}
+        {data?.data.map(
+          (
+            thought: JSX.IntrinsicAttributes & {
+              content: string;
+              emotions: string[];
+              _id: string;
+              created_at: string;
+              likes: number;
+            }
+          ) => <Thought {...thought} />
+        )}
+      </section>
+    </>
   );
 }

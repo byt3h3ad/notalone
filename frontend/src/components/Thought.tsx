@@ -1,8 +1,7 @@
 import { HandHeart } from "lucide-react";
 import React from "react";
-import { useLikeThought } from "../lib/hooks";
+import { useGetLikeCount, useLikeThought } from "../lib/hooks";
 import { formatDate } from "../lib/utils";
-import { Button } from "./ui/button";
 import {
   Card,
   CardContent,
@@ -19,15 +18,19 @@ type Props = {
   likes: number;
 };
 
-export const Thought: React.FC<Props> = ({
-  _id,
-  content,
-  created_at,
-  likes,
-}) => {
-  const { mutate: like } = useLikeThought();
+export const Thought: React.FC<Props> = ({ _id, content, created_at }) => {
+  const { data, refetch } = useGetLikeCount(_id);
+  const likes = data?.data.likes;
+  const { mutate, isPending } = useLikeThought();
+  const handleClick = () => {
+    mutate(_id, {
+      onSuccess: () => {
+        refetch();
+      },
+    });
+  };
   return (
-    <Card key={_id} className="w-fit h-fit">
+    <Card key={_id} className="h-fit">
       <CardHeader>
         <CardDescription className="opacity-60">
           {formatDate(created_at)}
@@ -36,17 +39,20 @@ export const Thought: React.FC<Props> = ({
       <CardContent>
         <p className="">{content}</p>
       </CardContent>
-      <CardFooter className="flex gap-2 text-sm text-pink-500">
-        <Button
-          variant="ghost"
-          size={"icon"}
-          onClick={() => {
-            like(_id);
-          }}
+      <CardFooter className="text-pink-600">
+        <button
+          className="flex items-center gap-3 bg-neutral-100 py-1 px-3 rounded-full"
+          onClick={handleClick}
         >
-          <HandHeart />
-        </Button>
-        {likes}
+          {isPending ? (
+            <span className="opacity-60 font-light text-sm">supporting...</span>
+          ) : (
+            <>
+              <HandHeart className="size-6" />
+              <span className="text-sm">{likes}</span>
+            </>
+          )}
+        </button>
       </CardFooter>
     </Card>
   );

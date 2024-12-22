@@ -1,9 +1,10 @@
 from datetime import datetime, timezone
 from fastapi import FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 from bson import ObjectId
 from typing import List
-from models import create_thought, thought
+from models import create_thought, thought, PostLikeCount
 from contextlib import asynccontextmanager
 import os
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -44,6 +45,10 @@ app.add_middleware(
 async def root():
     return {"message": "Hello World"}
 
+@app.get('/favicon.ico', include_in_schema=False)
+async def favicon():
+    return FileResponse("favicon.ico")
+
 @app.post("/thoughts", response_model=thought, status_code=status.HTTP_201_CREATED)
 async def create_post(post: create_thought):
     post_dict = post.model_dump()
@@ -66,6 +71,16 @@ async def get_thought(thought_id: str):
         if thought is None:
             raise HTTPException(status_code=404, detail="Post not found")
         return thought
+    except:
+        raise HTTPException(status_code=404, detail="Post not found")
+    
+@app.get("/thoughts/{thought_id}/like", response_model=PostLikeCount)
+async def get_thought(thought_id: str):
+    try:
+        thought = await app.list.find_one({"_id": ObjectId(thought_id)}, projection={"likes": 1})
+        if thought is None:
+            raise HTTPException(status_code=404, detail="Post not found")
+        return PostLikeCount(likes=thought.get("likes", 0))
     except:
         raise HTTPException(status_code=404, detail="Post not found")
     

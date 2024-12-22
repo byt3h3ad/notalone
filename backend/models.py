@@ -53,3 +53,6 @@ class thought(create_thought):
     id: PyObjectId = Field(alias="_id")
     created_at: datetime
     likes: int = 0
+
+class PostLikeCount(BaseModel):
+    likes: int
