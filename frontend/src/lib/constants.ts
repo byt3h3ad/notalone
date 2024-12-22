@@ -10,3 +10,28 @@ export const ENDPOINTS = {
   LIKE_POST: CONSTANTS.BACKEND_URI + "thoughts",
   POSTS_COUNT: CONSTANTS.BACKEND_URI + "thoughts/stats/count",
 };
+
+export const EMOTIONS: string[] = [
+  "I Don't Know",
+  "Anger",
+  "Irritability",
+  "Sadness",
+  "Despair",
+  "Anxiety",
+  "Fear",
+  "Guilt",
+  "Shame",
+  "Loneliness",
+  "Isolation",
+  "Overwhelm",
+  "Stress",
+  "Confusion",
+  "Uncertainty",
+  "Frustration",
+  "Helplessness",
+  "Insecure",
+  "Low Self-Esteem",
+  "Grief",
+  "Loss",
+  "Relax & Calm",
+];
