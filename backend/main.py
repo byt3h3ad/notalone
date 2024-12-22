@@ -1,5 +1,6 @@
 from datetime import datetime, timezone
 from fastapi import FastAPI, HTTPException, status
+from fastapi.middleware.cors import CORSMiddleware
 from bson import ObjectId
 from typing import List
 from models import create_thought, thought
@@ -29,7 +30,15 @@ async def get_mongo_client(app: FastAPI):
 
     client.close()
 
-app = FastAPI(lifespan=get_mongo_client)
+app = FastAPI(lifespan=get_mongo_client, title="NotAlone API", description="API for NotAlone Website")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 async def root():

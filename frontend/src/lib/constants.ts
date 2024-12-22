@@ -7,6 +7,6 @@ export const ENDPOINTS = {
   CREATE_POST: CONSTANTS.BACKEND_URI + "thoughts",
   GET_POST: CONSTANTS.BACKEND_URI + "thoughts/",
   DELETE_POST: CONSTANTS.BACKEND_URI + "thoughts/",
-  LIKE_POST: CONSTANTS.BACKEND_URI + "thoughts/",
+  LIKE_POST: CONSTANTS.BACKEND_URI + "thoughts",
   POSTS_COUNT: CONSTANTS.BACKEND_URI + "thoughts/stats/count",
 };
