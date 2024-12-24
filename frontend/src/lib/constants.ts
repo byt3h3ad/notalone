@@ -1,5 +1,7 @@
 export const CONSTANTS = {
-  BACKEND_URI: "http://127.0.0.1:8000/",
+  BACKEND_URI: import.meta.env.DEV
+    ? "http://127.0.0.1:8000/"
+    : "https://notalone-4f0d.onrender.com/",
 };
 
 export const ENDPOINTS = {
