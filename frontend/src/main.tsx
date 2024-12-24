@@ -7,7 +7,7 @@ import "./index.css";
 import { routeTree } from "./routeTree.gen";
 import { Toaster } from "./components/ui/sonner";
 
-const queryClient = new QueryClient();
+export const queryClient = new QueryClient();
 
 const router = createRouter({
   routeTree,
@@ -25,7 +25,7 @@ declare module "@tanstack/react-router" {
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={false} />
+      <ReactQueryDevtools initialIsOpen={false} position="right" />
       <RouterProvider router={router} />
       <Toaster />
     </QueryClientProvider>

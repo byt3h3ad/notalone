@@ -19,7 +19,7 @@ type Props = {
 };
 
 export const Thought: React.FC<Props> = ({ _id, content, created_at }) => {
-  const { data, refetch } = useGetLikeCount(_id);
+  const { data, isPending: isLikesPending, refetch } = useGetLikeCount(_id);
   const likes = data?.data.likes;
   const { mutate, isPending } = useLikeThought();
   const handleClick = () => {
@@ -49,7 +49,7 @@ export const Thought: React.FC<Props> = ({ _id, content, created_at }) => {
           ) : (
             <>
               <HandHeart className="size-6" />
-              <span className="text-sm">{likes}</span>
+              <span className="text-sm">{isLikesPending ? 0 : likes}</span>
             </>
           )}
         </button>

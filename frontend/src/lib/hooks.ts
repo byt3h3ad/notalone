@@ -1,5 +1,6 @@
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { queryClient } from "../main";
 import { ENDPOINTS } from "./constants";
 
 export const useGetThoughts = () => {
@@ -22,6 +23,9 @@ export const useCreateThought = () => {
   const mutation = useMutation({
     mutationFn: (data: { content: string; emotions: string[] }) =>
       axios.post(ENDPOINTS.CREATE_POST, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["thoughts_count"] });
+    },
   });
   return mutation;
 };
