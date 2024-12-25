@@ -49,7 +49,7 @@ function RouteComponent() {
     });
   }
   return (
-    <main className="grid place-content-center min-h-screen lowercase">
+    <main className="grid place-content-center min-h-screen lowercase m-4">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}

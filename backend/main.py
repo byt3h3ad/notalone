@@ -36,6 +36,7 @@ app = FastAPI(lifespan=get_mongo_client, title="NotAlone API", description="API 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:5173", "http://localhost:4173", "https://youarenotunknown.netlify.app"],
+    allow_origin_regex=r"https://.*youarenotunknown\.netlify\.app.*",
     allow_credentials=True,
     allow_methods=["GET", "HEAD", "PUT", "POST", "DELETE"],
     allow_headers=["*"],

@@ -6,7 +6,7 @@ export const Route = createLazyFileRoute("/about")({
 
 function RouteComponent() {
   return (
-    <main className="max-w-3xl mx-auto my-6">
+    <main className="max-w-3xl mx-8 place-content-center grid my-6">
       <p>all our mental health is fucked.</p>
       <p>we all sometimes need a place to vent, without judgement.</p>
       <p>this is meant to be one.</p>
