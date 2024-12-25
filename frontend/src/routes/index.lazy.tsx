@@ -2,6 +2,7 @@ import { createLazyFileRoute } from "@tanstack/react-router";
 import { JSX } from "react/jsx-runtime";
 import { Thought } from "../components/Thought";
 import { useGetThoughts } from "../lib/hooks";
+import { Skeleton } from "../components/ui/skeleton";
 
 export const Route = createLazyFileRoute("/")({
   component: RouteComponent,
@@ -10,20 +11,30 @@ export const Route = createLazyFileRoute("/")({
 function RouteComponent() {
   const { data, isPending, isError } = useGetThoughts();
   return (
-    <section className="m-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
-      {isPending && <div>Loading...</div>}
-      {isError && <div>Error...</div>}
-      {data?.data.map(
-        (
-          thought: JSX.IntrinsicAttributes & {
-            content: string;
-            emotions: string[];
-            _id: string;
-            created_at: string;
-            likes: number;
-          }
-        ) => <Thought {...thought} />
+    <>
+      {isPending && (
+        <section className="flex m-4 gap-4 flex-wrap justify-center">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <div>
+              <Skeleton className="h-48 aspect-[6/4] rounded-2xl" key={i} />
+            </div>
+          ))}
+        </section>
       )}
-    </section>
+      <section className="m-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+        {isError && <div>Error...</div>}
+        {data?.data.map(
+          (
+            thought: JSX.IntrinsicAttributes & {
+              content: string;
+              emotions: string[];
+              _id: string;
+              created_at: string;
+              likes: number;
+            }
+          ) => <Thought {...thought} />
+        )}
+      </section>
+    </>
   );
 }

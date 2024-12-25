@@ -67,7 +67,7 @@ function RouteComponent() {
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className="text-red-600" />
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -114,7 +114,7 @@ function RouteComponent() {
                     ))}
                   </div>
                 </FormControl>
-                <FormMessage className="text-red-600" />
+                <FormMessage />
               </FormItem>
             )}
           />

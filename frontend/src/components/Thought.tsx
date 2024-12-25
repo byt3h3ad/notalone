@@ -41,7 +41,7 @@ export const Thought: React.FC<Props> = ({ _id, content, created_at }) => {
       </CardContent>
       <CardFooter className="text-pink-600">
         <button
-          className="flex items-center gap-3 bg-neutral-100 py-1 px-3 rounded-full"
+          className="flex items-center gap-3 bg-slate-100 py-1 px-3 rounded-full"
           onClick={handleClick}
         >
           {isPending ? (
