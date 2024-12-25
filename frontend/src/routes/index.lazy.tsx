@@ -15,9 +15,7 @@ function RouteComponent() {
       {isPending && (
         <section className="flex m-4 gap-4 flex-wrap justify-center">
           {Array.from({ length: 3 }).map((_, i) => (
-            <div>
-              <Skeleton className="h-48 aspect-[6/4] rounded-2xl" key={i} />
-            </div>
+            <Skeleton className="h-48 aspect-[6/4] rounded-2xl" key={i} />
           ))}
         </section>
       )}
@@ -31,8 +29,9 @@ function RouteComponent() {
               _id: string;
               created_at: string;
               likes: number;
-            }
-          ) => <Thought {...thought} />
+            },
+            index: number
+          ) => <Thought {...thought} key={index} />
         )}
       </section>
     </>
