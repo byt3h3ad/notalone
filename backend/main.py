@@ -11,14 +11,14 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from dotenv import load_dotenv
 load_dotenv()
 
-DB = "notalone"
+DATABASE_NAME = "notalone"
 COLLECTION_NAME = "thoughts"
 MONGODB_URI = os.environ["MONGODB_URI"]
 
 @asynccontextmanager
 async def get_mongo_client(app: FastAPI):
     client = AsyncIOMotorClient(MONGODB_URI)
-    database = client[DB]
+    database = client[DATABASE_NAME]
 
     pong = await database.command("ping")
     if int(pong["ok"]) != 1:
@@ -61,7 +61,7 @@ async def create_post(post: create_thought):
 
 @app.get("/thoughts", response_model=List[thought])
 async def get_thoughts(skip : int = 0, limit: int = 40):
-    thoughts = await app.list.find().skip(skip).limit(limit).to_list(limit)
+    thoughts = await app.list.find().sort("created_at", -1).skip(skip).limit(limit).to_list(limit)
     return thoughts
 
 @app.get("/thoughts/{thought_id}", response_model=thought)

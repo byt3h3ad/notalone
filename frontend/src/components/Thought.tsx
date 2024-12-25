@@ -20,8 +20,8 @@ type Props = {
 
 export const Thought: React.FC<Props> = ({ _id, content, created_at }) => {
   const { data, isPending: isLikesPending, refetch } = useGetLikeCount(_id);
-  const likes = data?.data.likes;
   const { mutate, isPending } = useLikeThought();
+  const likes = data?.data.likes;
   const handleClick = () => {
     mutate(_id, {
       onSuccess: () => {
@@ -37,7 +37,7 @@ export const Thought: React.FC<Props> = ({ _id, content, created_at }) => {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <p className="">{content}</p>
+        <p className="text-pretty">{content}</p>
       </CardContent>
       <CardFooter className="text-pink-600">
         <button
