@@ -1,7 +1,6 @@
 import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
 import React, { Suspense } from "react";
 import { useGetThoughtCount } from "../lib/hooks";
-import { Button } from "../components/ui/button";
 
 const TanStackRouterDevtools = import.meta.env.PROD
   ? () => null // Render nothing in production
