@@ -33,14 +33,14 @@ export const useCreateThought = () => {
 export const useGetLikeCount = (id: string) => {
   const query = useQuery({
     queryKey: ["likes", { id }],
-    queryFn: () => axios.get(`${ENDPOINTS.LIKE_POST}/${id}/like`),
+    queryFn: () => axios.get(`${ENDPOINTS.LIKE_POST}/${id}`),
   });
   return query;
 };
 
 export const useLikeThought = () => {
   const mutation = useMutation({
-    mutationFn: (id: string) => axios.put(`${ENDPOINTS.LIKE_POST}/${id}/like`),
+    mutationFn: (id: string) => axios.put(`${ENDPOINTS.LIKE_POST}/${id}`),
   });
   return mutation;
 };

@@ -75,7 +75,7 @@ async def get_thought(thought_id: str):
     except:
         raise HTTPException(status_code=404, detail="Post not found")
     
-@app.get("/thoughts/{thought_id}/like", response_model=PostLikeCount)
+@app.get("/thoughts/like/{thought_id}", response_model=PostLikeCount)
 async def get_thought(thought_id: str):
     try:
         thought = await app.list.find_one({"_id": ObjectId(thought_id)}, projection={"likes": 1})
@@ -85,7 +85,7 @@ async def get_thought(thought_id: str):
     except:
         raise HTTPException(status_code=404, detail="Post not found")
     
-@app.put("/thoughts/{thought_id}/like", response_model=thought)
+@app.put("/thoughts/like/{thought_id}", response_model=thought)
 async def like_post(thought_id: str):
     try:
         post = await app.list.find_one_and_update(

@@ -1,16 +1,14 @@
-export const CONSTANTS = {
-  BACKEND_URI: import.meta.env.DEV
-    ? "http://127.0.0.1:8000/"
-    : "https://notalone-4f0d.onrender.com/",
-};
+const BACKEND_URI = import.meta.env.DEV
+  ? "http://127.0.0.1:8000/"
+  : "https://notalone-4f0d.onrender.com/";
 
 export const ENDPOINTS = {
-  GET_POSTS: CONSTANTS.BACKEND_URI + "thoughts",
-  CREATE_POST: CONSTANTS.BACKEND_URI + "thoughts",
-  GET_POST: CONSTANTS.BACKEND_URI + "thoughts",
-  DELETE_POST: CONSTANTS.BACKEND_URI + "thoughts",
-  LIKE_POST: CONSTANTS.BACKEND_URI + "thoughts",
-  POSTS_COUNT: CONSTANTS.BACKEND_URI + "thoughts/stats/count",
+  GET_POSTS: BACKEND_URI + "thoughts",
+  CREATE_POST: BACKEND_URI + "thoughts",
+  GET_POST: BACKEND_URI + "thoughts",
+  DELETE_POST: BACKEND_URI + "thoughts",
+  LIKE_POST: BACKEND_URI + "thoughts/like",
+  POSTS_COUNT: BACKEND_URI + "thoughts/stats/count",
 };
 
 export const EMOTIONS: string[] = [

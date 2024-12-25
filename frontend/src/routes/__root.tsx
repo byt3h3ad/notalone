@@ -1,6 +1,7 @@
 import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
 import React, { Suspense } from "react";
 import { useGetThoughtCount } from "../lib/hooks";
+import { Button } from "../components/ui/button";
 
 const TanStackRouterDevtools = import.meta.env.PROD
   ? () => null // Render nothing in production
@@ -38,6 +39,16 @@ function RootComponent() {
       </div>
       <hr />
       <Outlet />
+      <footer className="py-2 px-4 text-center">
+        made with ❤️ by{" "}
+        <a
+          href="https://home.byt3h3ad.workers.dev/website"
+          className="underline-offset-4 hover:underline"
+          target="_blank"
+        >
+          byt3h3ad
+        </a>
+      </footer>
       <Suspense>
         <TanStackRouterDevtools />
       </Suspense>
