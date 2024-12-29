@@ -37,7 +37,7 @@ export const Thought: React.FC<Props> = ({ _id, content, created_at }) => {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <p className="text-pretty">{content}</p>
+        <p className="text-pretty whitespace-pre-line">{content}</p>
       </CardContent>
       <CardFooter className="text-pink-600">
         <button
