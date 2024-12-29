@@ -24,7 +24,7 @@ const formSchema = z.object({
   }),
 });
 
-export const Route = createLazyFileRoute("/create")({
+export const Route = createLazyFileRoute("/post")({
   component: RouteComponent,
 });
 

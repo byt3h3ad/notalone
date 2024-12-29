@@ -22,13 +22,13 @@ function RootComponent() {
       <div className="py-2 mx-auto px-4 flex gap-4 w-full justify-between lowercase">
         <div className="flex gap-4">
           <Link to="/" className="[&.active]:font-bold">
-            Home
+            home
           </Link>{" "}
           <Link to="/about" className="[&.active]:font-bold">
-            About
+            about
           </Link>
-          <Link to="/create" className="[&.active]:font-bold">
-            Create
+          <Link to="/post" className="[&.active]:font-bold">
+            post
           </Link>
         </div>
         <p>
