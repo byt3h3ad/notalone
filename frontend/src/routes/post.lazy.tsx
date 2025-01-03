@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createLazyFileRoute } from "@tanstack/react-router";
+import { createLazyFileRoute, useNavigate } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -36,15 +36,18 @@ function RouteComponent() {
       emotions: [],
     },
   });
+  const navigate = useNavigate();
   const { mutate, isPending } = useCreateThought();
   function onSubmit(data: z.infer<typeof formSchema>) {
     mutate(data, {
       onError: () => {
-        toast("an error occurred while submitting your thought");
+        toast.error("an error occurred while submitting your thought");
       },
       onSuccess: () => {
-        toast("your thought has been posted");
-        form.reset();
+        toast.success("your thought has been posted", {
+          duration: 2000,
+        });
+        navigate({ to: "/" });
       },
     });
   }
