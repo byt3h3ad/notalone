@@ -1,8 +1,7 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
-import { JSX } from "react/jsx-runtime";
-import { Thought } from "../components/Thought";
-import { useGetThoughts } from "../lib/hooks";
+import { Thought } from "../components/thought";
 import { Skeleton } from "../components/ui/skeleton";
+import { useGetThoughts } from "../lib/hooks";
 
 export const Route = createLazyFileRoute("/")({
   component: RouteComponent,
@@ -19,11 +18,11 @@ function RouteComponent() {
           ))}
         </section>
       )}
-      <section className="m-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
-        {isError && <div>Error...</div>}
+      {isError && <div>Error...</div>}
+      <section className="m-4 space-y-4 columns-3xs">
         {data?.data.map(
           (
-            thought: JSX.IntrinsicAttributes & {
+            thought: {
               content: string;
               emotions: string[];
               _id: string;

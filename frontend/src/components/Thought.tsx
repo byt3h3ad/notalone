@@ -1,7 +1,7 @@
 import { HandHeart } from "lucide-react";
 import React from "react";
 import { useGetLikeCount, useLikeThought } from "../lib/hooks";
-import { formatDate } from "../lib/utils";
+import { cn, formatDate } from "../lib/utils";
 import {
   Card,
   CardContent,
@@ -16,9 +16,15 @@ type Props = {
   _id: string;
   created_at: string;
   likes: number;
+  className?: string;
 };
 
-export const Thought: React.FC<Props> = ({ _id, content, created_at }) => {
+export const Thought: React.FC<Props> = ({
+  _id,
+  content,
+  created_at,
+  className,
+}) => {
   const { data, isPending: isLikesPending, refetch } = useGetLikeCount(_id);
   const { mutate, isPending } = useLikeThought();
   const likes = data?.data.likes;
@@ -30,7 +36,7 @@ export const Thought: React.FC<Props> = ({ _id, content, created_at }) => {
     });
   };
   return (
-    <Card key={_id} className="h-fit">
+    <Card key={_id} className={cn("break-inside-avoid-column", className)}>
       <CardHeader>
         <CardDescription className="opacity-60">
           {formatDate(created_at)}
